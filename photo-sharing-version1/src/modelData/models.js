@@ -1,5 +1,4 @@
 "use strict";
-
 /**
  * Model data for Project 4 - the photo sharing site.
  * This module returns an object called models with the following
@@ -44,7 +43,6 @@
  *   __v (number)           - The version number.
  *   load_date_time (date)  - The date the schema was made in ISO format.
  */
-
 const schemaInfo = {
   load_date_time: "Fri Apr 29 2016 01:45:15 GMT-0700 (PDT)",
   __v: 0,

@@ -19,6 +19,9 @@ function UserDetail() {
   }
 
   return (
+    // tạo hộp (card) trắng
+    // nội trung trong hộp (card)
+    // h4 -> cỡ chữ to
     <Card>
       <CardContent>
         <Typography variant="h4">

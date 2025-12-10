@@ -19,7 +19,7 @@ function UserPhotos() {
       .then((data) => setPhotos(data))
       .catch((err) => console.log(err));
   }, [userId]);
-
+  // nếu photo null hoặc mảng rỗng
   if (!photos || photos.length === 0) {
     return <Typography>No photos available.</Typography>;
   }
@@ -45,6 +45,7 @@ function UserPhotos() {
             <Typography variant="h6">Comments:</Typography>
 
             {p.comments.map((c) => (
+              // với mỗi cmt của ảnh p render ra 1 card
               <Card key={c._id} style={{ marginTop: "10px", padding: "10px" }}>
                 <Typography variant="body1">{c.comment}</Typography>
                 <Typography variant="caption">
