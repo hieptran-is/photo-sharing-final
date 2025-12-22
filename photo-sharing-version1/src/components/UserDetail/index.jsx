@@ -27,11 +27,37 @@ function UserDetail() {
       </Typography>
       <Typography>Location: {user.location}</Typography>
       <Typography>Occupation: {user.occupation}</Typography>
+      {/*
+        Comment nhiều dòng
+        dòng 2
+        dòng 3
+      */}
       <Typography>Description: {user.description}</Typography>
       <br />
       <Link to={`/photos/${user._id}`}>Photos</Link>
+      <br />
+      <Link to={`/posts/${user._id}`}>Posts</Link>
     </div>
   );
 }
 
 export default UserDetail;
+/*
+import React, { useEffect, useState, useRef } from "react";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  List,
+  ListItemButton,
+  ListItemText,
+  Card,
+  CardMedia,
+  CardContent,
+  Divider,
+  TextField,
+} from "@mui/material";
+import fetchModel from "../../lib/fetchModelData";
+*/

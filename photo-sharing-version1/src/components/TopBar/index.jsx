@@ -38,6 +38,8 @@ function TopBar({ currentUser, onLogout }) {
       titleRight = `Photos of ${user.first_name} ${user.last_name}`;
     } else if (path.startsWith("/users/")) {
       titleRight = `${user.first_name} ${user.last_name}`;
+    } else if (path.startsWith("/posts/")) {
+      titleRight = `Blog of ${user.first_name} ${user.last_name}`;
     }
   }
 

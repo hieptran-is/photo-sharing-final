@@ -14,6 +14,7 @@ import UserDetail from "./components/UserDetail";
 import UserList from "./components/UserList";
 import UserPhotos from "./components/UserPhotos";
 import LoginRegister from "./components/LoginRegister";
+import BlogPost from "./components/BlogPost";
 
 const BASE_URL = "https://rzsrsx-8081.csb.app";
 
@@ -128,6 +129,18 @@ const App = () => {
           <MainLayout currentUser={currentUser} onLogout={handleLogout}>
             {currentUser ? (
               <UserPhotos />
+            ) : (
+              <LoginRegister onLogin={handleLoginSuccess} />
+            )}
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/posts/:userId"
+        element={
+          <MainLayout currentUser={currentUser} onLogout={handleLogout}>
+            {currentUser ? (
+              <BlogPost />
             ) : (
               <LoginRegister onLogin={handleLoginSuccess} />
             )}
