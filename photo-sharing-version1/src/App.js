@@ -128,7 +128,7 @@ const App = () => {
         element={
           <MainLayout currentUser={currentUser} onLogout={handleLogout}>
             {currentUser ? (
-              <UserPhotos />
+              <UserPhotos currentUser={currentUser} />
             ) : (
               <LoginRegister onLogin={handleLoginSuccess} />
             )}

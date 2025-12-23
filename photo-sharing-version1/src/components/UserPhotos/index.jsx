@@ -15,7 +15,7 @@ import "./styles.css";
 
 const BASE_URL = "https://rzsrsx-8081.csb.app";
 
-function UserPhotos() {
+function UserPhotos({ currentUser }) {
   const { userId } = useParams();
   const [photos, setPhotos] = useState([]);
   const location = useLocation();
@@ -126,7 +126,40 @@ function UserPhotos() {
   if (!photos || photos.length === 0) {
     return <Typography>No photos available.</Typography>;
   }
-
+  /*  const handleDeleteComment = async (photoId, commentId) => { // MỘT
+    if (!window.confirm("Delete this comment?")) return;
+    try {
+      const res = await fetch(
+        `${BASE_URL}/commentsOfPhoto/${photoId}/${commentId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+      if (!res.ok) {
+        let msg = "Failed to delete comment";
+        try {
+          const data = await res.json();
+          if (data && data.message) msg = data.message;
+        } catch (e) {}
+        alert(msg);
+        return;
+      }
+      // update UI ngay: remove comment khỏi đúng photo
+      setPhotos((prevPhotos) =>
+        prevPhotos.map((p) => {
+          if (p._id !== photoId) return p;
+          return {
+            ...p,
+            comments: p.comments.filter((c) => c._id !== commentId),
+          };
+        })
+      );
+    } catch (err) {
+      console.error("Delete comment error:", err);
+      alert("Cannot connect to server");
+    }
+  }; */
   return (
     <div>
       {photos.map((p) => (
@@ -147,21 +180,52 @@ function UserPhotos() {
 
             <Typography variant="h6">Comments:</Typography>
 
-            {p.comments.map((c) => (
-              <Card key={c._id} style={{ marginTop: "10px", padding: "10px" }}>
-                <Typography variant="body1">{c.comment}</Typography>
-                <Typography variant="caption">
-                  —{" "}
-                  <Link
-                    to={`/users/${c.user._id}`}
-                    style={{ textDecoration: "none" }}
+            {p.comments.map((c) => {
+              //const isMine = // MỘT
+              //currentUser &&
+              //c.user &&
+              //String(c.user._id) === String(currentUser._id);
+
+              return (
+                <Card
+                  key={c._id}
+                  style={{ marginTop: "10px", padding: "10px" }}
+                >
+                  <Typography variant="body1">{c.comment}</Typography>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      marginTop: 6,
+                    }}
                   >
-                    {c.user.first_name} {c.user.last_name}
-                  </Link>{" "}
-                  ({new Date(c.date_time).toLocaleString()})
-                </Typography>
-              </Card>
-            ))}
+                    <Typography variant="caption">
+                      —{" "}
+                      <Link
+                        to={`/users/${c.user._id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        {c.user.first_name} {c.user.last_name}
+                      </Link>{" "}
+                      ({new Date(c.date_time).toLocaleString()})
+                    </Typography>
+                    {/* //MỘT
+                    {isMine ? (
+                      <Button
+                        size="small"
+                        color="error"
+                        variant="text"
+                        onClick={() => handleDeleteComment(p._id, c._id)}
+                      >
+                        DELETE
+                      </Button>
+                    ) : null} */}
+                  </div>
+                </Card>
+              );
+            })}
 
             {/* Form thêm comment mới cho photo p */}
             <Divider style={{ margin: "15px 0" }} />
