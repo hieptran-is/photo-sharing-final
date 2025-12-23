@@ -175,11 +175,10 @@ function UserPhotos({ currentUser }) {
     // đưa nd hiện tại vào text
   };
   //HAI-2
-  */
+*/
   }
   {
-    /*
-  //HAI-3
+    /*//HAI-3
   const saveEditComment = async (photoId, commentId) => {
     const text = (editText || "").trim();
     if (!text) return;
@@ -227,7 +226,7 @@ function UserPhotos({ currentUser }) {
     }
   };
   //HAI-3
-  */
+*/
   }
   if (!photos || photos.length === 0) {
     return <Typography>No photos available.</Typography>;
@@ -258,9 +257,9 @@ function UserPhotos({ currentUser }) {
               //currentUser &&
               //c.user &&
               //String(c.user._id) === String(currentUser._id);
+
               {
-                /*
-              //HAI-4
+                /*//HAI-4
               const isMine =
                 currentUser &&
                 c.user &&
@@ -270,9 +269,9 @@ function UserPhotos({ currentUser }) {
                 editing &&
                 String(editing.photoId) === String(p._id) &&
                 String(editing.commentId) === String(c._id);
-              //HAI-4
-              */
+            //HAI-4 */
               }
+
               return (
                 <Card
                   key={c._id}
@@ -280,7 +279,7 @@ function UserPhotos({ currentUser }) {
                 >
                   <Typography variant="body1">{c.comment}</Typography>
 
-                  {/*HAI-5
+                  {/*HAI-5*
                   {isEditing ? (
                     <TextField
                       fullWidth
@@ -303,7 +302,7 @@ function UserPhotos({ currentUser }) {
                   ) : (
                     <Typography variant="body1">{c.comment}</Typography>
                   )}
-                  HAI-5*/}
+                  *HAI-5*/}
 
                   <div
                     style={{
@@ -324,7 +323,7 @@ function UserPhotos({ currentUser }) {
                       ({new Date(c.date_time).toLocaleString()})
                     </Typography>
 
-                    {/*HAI-6
+                    {/*HAI-6*
                     {isMine ? (
                       <Button
                         size="small"
@@ -335,7 +334,7 @@ function UserPhotos({ currentUser }) {
                         {"EDIT"}
                       </Button>
                     ) : null}
-                    HAI-6*/}
+                    *HAI-6*/}
 
                     {/* //MỘT
                     {isMine ? (
