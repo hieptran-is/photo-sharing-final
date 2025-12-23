@@ -123,9 +123,6 @@ function UserPhotos({ currentUser }) {
     }
   };
 
-  if (!photos || photos.length === 0) {
-    return <Typography>No photos available.</Typography>;
-  }
   /*  const handleDeleteComment = async (photoId, commentId) => { // MỘT
     if (!window.confirm("Delete this comment?")) return;
     try {
@@ -160,6 +157,9 @@ function UserPhotos({ currentUser }) {
       alert("Cannot connect to server");
     }
   }; */
+  if (!photos || photos.length === 0) {
+    return <Typography>No photos available.</Typography>;
+  }
   return (
     <div>
       {photos.map((p) => (
