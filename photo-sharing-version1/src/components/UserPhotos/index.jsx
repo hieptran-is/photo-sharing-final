@@ -26,6 +26,13 @@ function UserPhotos({ currentUser }) {
   // Map lưu lỗi theo từng photoId
   const [commentErrorByPhoto, setCommentErrorByPhoto] = useState({});
 
+  //HAI-1
+  const [editing, setEditing] = useState(null);
+  // editing = { photoId, commentId } hoặc null -> đánh dấu cmt nào đang đc edit, thuộc photo nào
+  const [editText, setEditText] = useState("");
+  // lưu nội dung mới
+  //HAI-1
+
   useEffect(() => {
     fetchModel(`/api/photo/${userId}`)
       .then((data) => setPhotos(data))
@@ -157,9 +164,75 @@ function UserPhotos({ currentUser }) {
       alert("Cannot connect to server");
     }
   }; */
+  {
+    /*
+  //HAI-2
+  const startEditComment = (photoId, cmt) => {
+    // id của photo và bản thân cmt
+    setEditing({ photoId, commentId: cmt._id });
+    // web biết đang sửa cmt nào thuộc ảnh nào
+    setEditText(cmt.comment || "");
+    // đưa nd hiện tại vào text
+  };
+  //HAI-2
+  */
+  }
+  {
+    /*
+  //HAI-3
+  const saveEditComment = async (photoId, commentId) => {
+    const text = (editText || "").trim();
+    if (!text) return;
+
+    try {
+      const res = await fetch(
+        `${BASE_URL}/commentsOfPhoto/${photoId}/${commentId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ comment: text }),
+        }
+      );
+
+      if (!res.ok) {
+        return;
+      }
+
+      const updated = await res.json(); // BE trả về cmt mới để hiển thị
+
+      setPhotos((prev) =>
+        prev.map((p) =>
+          p._id !== photoId
+            ? p
+            : {
+                ...p,
+                comments: p.comments.map((c) =>
+                  c._id !== commentId
+                    ? c
+                    : {
+                        ...c,
+                        comment: updated.comment,
+                        date_time: updated.date_time,
+                      }
+                ),
+              }
+        )
+      );
+
+      setEditing(null);
+      setEditText("");
+    } catch (err) {
+      console.error("Edit comment error:", err);
+    }
+  };
+  //HAI-3
+  */
+  }
   if (!photos || photos.length === 0) {
     return <Typography>No photos available.</Typography>;
   }
+
   return (
     <div>
       {photos.map((p) => (
@@ -185,13 +258,52 @@ function UserPhotos({ currentUser }) {
               //currentUser &&
               //c.user &&
               //String(c.user._id) === String(currentUser._id);
+              {
+                /*
+              //HAI-4
+              const isMine =
+                currentUser &&
+                c.user &&
+                String(c.user._id) === String(currentUser._id);
 
+              const isEditing =
+                editing &&
+                String(editing.photoId) === String(p._id) &&
+                String(editing.commentId) === String(c._id);
+              //HAI-4
+              */
+              }
               return (
                 <Card
                   key={c._id}
                   style={{ marginTop: "10px", padding: "10px" }}
                 >
                   <Typography variant="body1">{c.comment}</Typography>
+
+                  {/*HAI-5
+                  {isEditing ? (
+                    <TextField
+                      fullWidth
+                      size="small"
+                      autoFocus
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          saveEditComment(p._id, c._id);
+                        }
+                        if (e.key === "Escape") {
+                          setEditing(null);
+                          setEditText("");
+                        }
+                      }}
+                      style={{ marginTop: 4 }}
+                    />
+                  ) : (
+                    <Typography variant="body1">{c.comment}</Typography>
+                  )}
+                  HAI-5*/}
 
                   <div
                     style={{
@@ -211,6 +323,20 @@ function UserPhotos({ currentUser }) {
                       </Link>{" "}
                       ({new Date(c.date_time).toLocaleString()})
                     </Typography>
+
+                    {/*HAI-6
+                    {isMine ? (
+                      <Button
+                        size="small"
+                        variant="text"
+                        onClick={() => startEditComment(p._id, c)}
+                        disabled={isEditing}
+                      >
+                        {"EDIT"}
+                      </Button>
+                    ) : null}
+                    HAI-6*/}
+
                     {/* //MỘT
                     {isMine ? (
                       <Button
